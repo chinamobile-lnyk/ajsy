@@ -155,7 +155,14 @@
             <option value="不满足搭载要求">不满足搭载要求</option>
                    </select>
     </div>
-
+  
+    <!-- 隐藏的 biSuan 字段（用于规则匹配，用户无需操作） -->
+    <div class="form-group" style="display:none;">
+        <label>📌 必算标识</label>
+        <select id="biSuan">
+            <option value="必算">必算</option>
+        </select>
+    </div>
 
     <div class="btn-group">
         <button class="btn-calc" onclick="calculate()">✨ 计算费用</button>
