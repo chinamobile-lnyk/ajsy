@@ -156,13 +156,6 @@
                    </select>
     </div>
   
-    <!-- 隐藏的 biSuan 字段（用于规则匹配，用户无需操作） -->
-    <div class="form-group" style="display:none;">
-        <label>📌 必算标识</label>
-        <select id="biSuan">
-            <option value="必算">必算</option>
-        </select>
-    </div>
 
     <div class="btn-group">
         <button class="btn-calc" onclick="calculate()">✨ 计算费用</button>
@@ -186,13 +179,15 @@
     const rules = {};
     let ruleCount = 0;
 
-    function addRule(business, subCard, rongKuan, yuCun, familyNet, heBao, hardware, zuWang, biSuan, reward) {
-        const key = `${business}|${subCard}|${rongKuan}|${yuCun}|${familyNet}|${heBao}|${hardware}|${zuWang}|${biSuan}`;
-        if (!rules[key]) {
-            rules[key] = reward;
-            ruleCount++;
-        }
+
+    // 修改 addRule 函数 - 去掉 biSuan 参数
+function addRule(business, subCard, rongKuan, yuCun, familyNet, heBao, hardware, zuWang, reward) {
+    const key = `${business}|${subCard}|${rongKuan}|${yuCun}|${familyNet}|${heBao}|${hardware}|${zuWang}`;
+    if (!rules[key]) {
+        rules[key] = reward;
+        ruleCount++;
     }
+}
 
     // ==================== 添加规则 ====================
     // 未融合 + 融合
@@ -3019,24 +3014,25 @@ addRule("存量终端：299-999","未融合","未融合","★终端活动不涉�
     }
 
     function calculate() {
-        const business = getVal("businessType");
-        const subCard = getVal("subCard");
-        const rongKuan = getVal("rongKuan");
-        const yuCun = getVal("yuCun");
-        const familyNet = getVal("familyNet");
-        const heBao = getVal("heBao");
-        const hardware = getVal("hardware");
-        const zuWang = getVal("zuWang");
-        const biSuan = getVal("biSuan");
+    const business = getVal("businessType");
+    const subCard = getVal("subCard");
+    const rongKuan = getVal("rongKuan");
+    const yuCun = getVal("yuCun");
+    const familyNet = getVal("familyNet");
+    const heBao = getVal("heBao");
+    const hardware = getVal("hardware");
+    const zuWang = getVal("zuWang");
 
-        if (!business || !subCard || !rongKuan || !yuCun || !familyNet || !heBao || !hardware || !zuWang || !biSuan) {
-            document.getElementById("result").innerHTML = "❌ 请选择所有条件";
-            document.getElementById("result").className = "result-value error";
-            document.getElementById("resultDetail").innerHTML = "";
-            return;
-        }
+        // 检查所有必选字段
+    if (!business || !subCard || !rongKuan || !yuCun || !familyNet || !heBao || !hardware || !zuWang) {
+        document.getElementById("result").innerHTML = "❌ 请选择所有条件";
+        document.getElementById("result").className = "result-value error";
+        document.getElementById("resultDetail").innerHTML = "";
+        return;
+    }
+        
 
-        const key = `${business}|${subCard}|${rongKuan}|${yuCun}|${familyNet}|${heBao}|${hardware}|${zuWang}|${biSuan}`;
+        const key = `${business}|${subCard}|${rongKuan}|${yuCun}|${familyNet}|${heBao}|${hardware}|${zuWang}`;
         const reward = rules[key];
         const resultEl = document.getElementById("result");
         const detailEl = document.getElementById("resultDetail");
@@ -3055,7 +3051,7 @@ addRule("存量终端：299-999","未融合","未融合","★终端活动不涉�
     }
 
     function resetAll() {
-        const ids = ["businessType", "subCard", "rongKuan", "yuCun", "familyNet", "heBao", "hardware", "zuWang", "biSuan"];
+        const ids = ["businessType", "subCard", "rongKuan", "yuCun", "familyNet", "heBao", "hardware", "zuWang"];
         ids.forEach(id => {
             const el = document.getElementById(id);
             if (el) el.value = "";
