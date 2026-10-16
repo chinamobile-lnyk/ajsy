@@ -518,7 +518,7 @@ function calculate() {
    const 价值提升激励 = Math.max(0, 4 * cappedDiff);
 
     // ---- 4. 完美一单激励 ----
-    // ifs(a≤89,0, a<139,2a, a<199,2.5a, a≥199, min(3a,579))
+    // ifs(a≤89,0, a<139,2a, a<199,2.5a, a≥199, min(3a,597))
     let 完美一单激励;
     if (a <= 89) {
         完美一单激励 = 0;
@@ -527,7 +527,7 @@ function calculate() {
     } else if (a < 199) {
         完美一单激励 = 2.5 * a;
     } else {
-        完美一单激励 = Math.min(3 * a, 579);
+        完美一单激励 = Math.min(3 * a, 597);
     }
 
     // ---- 副卡条件系数 ----
