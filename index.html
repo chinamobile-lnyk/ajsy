@@ -329,15 +329,26 @@
         <div class="detail-row"><span>2. 价值提升激励 = 4 × min(199, △V)</span><span class="val" id="d_价值">--</span></div>
 	<div class="detail-row sub" style="padding-left: 2em;"><span>2.1 活动连带金币或和包月均优惠 (i)</span><span class="val" id="d_i">--</span></div>
         <div class="detail-row sub" style="padding-left: 2em;"><span> 2.2 △V= a-b-c-i </span><span class="val" id="d_diff">--</span></div>
-        <div class="detail-row"><span>3. 完美一单激励（最高）</span><span class="val" id="d_完美">--</span></div>
+
+        <div class="detail-row"><span>3. 完美一单激励</span><span class="val" id="d_完美实际">--</span></div>
+
         <div class="detail-row sub" style="padding-left: 2em;"><span>3.1 副卡条件</span><span class="val" id="d_k1">--</span></div>
         <div class="detail-row sub" style="padding-left: 2em;"><span>3.2 宽带条件</span><span class="val" id="d_k2">--</span></div>
         <div class="detail-row sub" style="padding-left: 2em;"><span>3.3 和包条件</span><span class="val" id="d_k3">--</span></div>
+
+        <div class="detail-row sub" style="padding-left: 2em;"><span>   注：完美一单激励最高得</span><span class="val" id="d_完美">--</span></div>
+
         <div class="detail-row total"><span>激励结果</span><span class="val" id="d_sum1">--</span></div>
-        <div class="detail-row sub" style="padding-left: 2em;"><span>注：激励结果=档位激励+价值提升激励+完美一单激励（最高）*副卡条件*宽带条件*和包条件</span></span></div>
-        <div class="detail-row"><span>※ 高质量考核金额</span><span class="val" id="d_高质量">--</span></div>
+        <div class="detail-row sub" style="padding-left: 2em;"><span>注：激励结果=档位激励+价值提升激励+完美一单激励</span></span></div>
+       <div class="detail-row" style="font-weight: bold; color: #e74c3c;">
+    <span>※ 高质量考核金额</span>
+    <span class="val" id="d_高质量" style="color: #e74c3c;">--</span>
+</div>
        <div class="detail-row sub" style="padding-left: 2em;"><span>注：考核金额按最高计算，部分考核是90%要求，实际会少些</span></span></div>       
  	<div class="detail-row total"><span>最终激励结果（含高质量）</span><span class="val" id="d_final">--</span></div>
+
+
+
     </div>
 
     <div class="info">提示：所有条件均需填写/选择后才能计算，点击 ⓘ 可查看高质量要求的具体标准</div>
@@ -538,6 +549,9 @@ function calculate() {
     const 激励结果 = 档位激励 + 价值提升激励
                    + 完美一单激励 * 副卡系数 * 宽带系数 * 和包系数;
 
+    // ---- 小结1：激励结果 ----
+    const 完美一单实际激励结果 = 完美一单激励 * 副卡系数 * 宽带系数 * 和包系数;
+
     // ---- 5. 高质量考核金额 ----
     let 高质量考核金额 = 0;
     if (q_yucun === "不符合要求") 高质量考核金额 -= 50;
@@ -566,6 +580,7 @@ function calculate() {
     document.getElementById("d_价值").innerText = fmt(价值提升激励) + " 元";
     document.getElementById("d_diff").innerText = fmt(diff);
     document.getElementById("d_完美").innerText = fmt(完美一单激励) + " 元";
+    document.getElementById("d_完美实际").innerText = fmt(完美一单实际激励结果) + " 元";
     document.getElementById("d_k1").innerText = 副卡系数;
     document.getElementById("d_k2").innerText = 宽带系数;
     document.getElementById("d_k3").innerText = 和包系数;
