@@ -670,7 +670,7 @@
 
         let k_cards = sState.cards < 2 ? 0 : 1;
         let k_bb = sState.broadband === '不办宽带' ? 0 : (sState.broadband === '存量宽带' ? 0.7 : 1);
-        let k_hb = (sState.type === '回馈' && sState.hb > 0) ? 0.9 : 1;
+        let k_hb = (sState.type === '回馈' && sState.hb > 0) ? 0.7 : 1;
         let inc3 = maxInc3 * k_cards * k_bb * k_hb;
 
         let baseTotal = inc1 + inc2 + inc3;
